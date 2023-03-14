@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRA kostky</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .kostky
+    {
+        font-size: 250px;
+    }
+    #PneboV.V
+    {
+        font-size: 50px;
+        color: green;
+    }
+    #PneboV.P
+    {
+        font-size: 50px;
+        color: red;
+    }
+</style>
+
+</head>
+<body>
+    <p>Stiskem myši kostky spustíte nebo zastavíte.</p>
+    <div class="kostky">
+        <i id="kostka1" class="fa-solid fa-dice-six"></i>
+        <i id="kostka2" class="fa-solid fa-dice-six"></i>
+    </div>
+    <h1 id="PneboV" class=""></h1>
+
+<script>
+    const kostka1 = document.getElementById("kostka1");
+    const kostka2 = document.getElementById("kostka2");
+    const stav = {
+        1: "fa-solid fa-dice-one",
+        2: "fa-solid fa-dice-two",
+        3: "fa-solid fa-dice-three",
+        4: "fa-solid fa-dice-four",
+        5: "fa-solid fa-dice-five",
+        6: "fa-solid fa-dice-six",
+    };
+
+    function zmenStavKostek()
+    {
+        cisloKostka1 = Math.floor((Math.random() * 6)+1)
+        cisloKostka2 = Math.floor((Math.random() * 6)+1)
+
+        kostka1.className = stav[cisloKostka1];
+        kostka2.className = stav[cisloKostka2];
+    }
+
+    let casovac = null;
+    const PneboV = document.getElementById("PneboV");
+
+    document.addEventListener("click", (udalost) => {
+        if (casovac == null)
+        {
+            zmenStavKostek();
+            casovac = setInterval(zmenStavKostek, 1000);
+            PneboV.innerText = "";
+        }
+        else
+        {
+            clearTimeout(casovac);
+            casovac = null;
+            if (cisloKostka1 == cisloKostka2)
+            {
+                PneboV.innerHTML = 'Výhra!!! <i class="fa-solid fa-face-smile-wink"></i>';
+                PneboV.className = "V";
+            }
+            else
+            {
+                PneboV.innerHTML = 'Prohra. <i class="fa-solid fa-face-sad-tear"></i>';
+                PneboV.className = "P";
+            }
+        }
+    });
+</script>
+</body>
+</html>
