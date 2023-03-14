@@ -1,5 +1,5 @@
 <h1>Ukázky</h1>
-Ukázky jednoduchých projektů a programovacích jazyků 
+Krátké části kódů v různých jazycích.
 
 <h2>Z kurzu programátora:</h2>
 hra-kostky.html <br>
